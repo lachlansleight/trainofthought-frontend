@@ -25,13 +25,16 @@ const StableDiffusionFetcher = ({
         const doFetch = async () => {
             console.log("Fetching prompt: ", prompt);
             setFetchedPrompt(prompt);
-            const res = await axios.post(`${process.env.NEXT_PUBLIC_STABLE_DIFFUSION_URL}/sdapi/v1/txt2img`, {
-                prompt: prompt,
-                steps: 20,
-                width: 512,
-                height: 512,
-                seed,
-            });
+            const res = await axios.post(
+                `${process.env.NEXT_PUBLIC_STABLE_DIFFUSION_URL}/sdapi/v1/txt2img`,
+                {
+                    prompt: prompt,
+                    steps: 20,
+                    width: 512,
+                    height: 512,
+                    seed,
+                }
+            );
             setImg(res.data.images[0]);
             if (onImgChange) onImgChange(res.data.images[0]);
         };
