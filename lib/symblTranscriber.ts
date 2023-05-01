@@ -1,16 +1,7 @@
 import { StreamingAPIConnection, Symbl } from "@symblai/symbl-web-sdk";
+import { TranscriberInterface, TranscriberState } from "./Transcriber";
 
-export type TranscriberState = "inactive" | "starting" | "running" | "stopping";
-export interface TranscriberInterface {
-    state: TranscriberState;
-    start(): void;
-    stop(): void;
-    addInterimListener(onInterimReceived: (transcript: string) => void): void;
-    addTranscriptListener(onTranscriptReceived: (transcript: string) => void): void;
-    addStateChangeListener(onStateChange: (state: TranscriberState) => void): void;
-}
-
-class SymblTranscriber {
+class SymblTranscriber implements TranscriberInterface {
     symbl: Symbl | null = null;
     connection: StreamingAPIConnection | null = null;
 

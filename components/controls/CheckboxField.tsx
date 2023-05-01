@@ -12,7 +12,7 @@ const CheckboxField = ({
     onChange?: (value: boolean) => void;
 }): JSX.Element => {
     return (
-        <div className={`w-full flex items-center ${className}`}>
+        <div className={`flex items-center ${className}`}>
             <label className="w-24">{label}</label>
             <Checkbox checked={value} onChange={onChange} />
         </div>

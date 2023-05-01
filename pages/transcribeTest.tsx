@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Button from "components/controls/Button";
 import Layout from "components/layout/Layout";
-import { TranscriberInterface, TranscriberState } from "lib/symblTranscriber";
+import { TranscriberInterface, TranscriberState } from "lib/Transcriber";
 
 const transcribeTest = (): JSX.Element => {
     const [entered, setEntered] = useState(false);
@@ -16,8 +16,10 @@ const transcribeTest = (): JSX.Element => {
         const setup = async () => {
             const devices = await navigator.mediaDevices.enumerateDevices();
             console.log(devices);
-            const SymblTranscriber = (await import("lib/symblTranscriber")).default;
-            setTranscriber(new SymblTranscriber());
+            //const SymblTranscriber = (await import("lib/symblTranscriber")).default;
+            //setTranscriber(new SymblTranscriber());
+            const DeepgramTranscriber = (await import("lib/deepgramTranscriber")).default;
+            setTranscriber(new DeepgramTranscriber());
         };
         setup();
     }, [entered]);
@@ -49,6 +51,7 @@ const transcribeTest = (): JSX.Element => {
                     {transcriberState === "running" ? (
                         <>
                             <p className="text-xl">{interim}</p>
+                            <hr/>
                             <div className="flex flex-col gap-2">
                                 {transcripts.map((t, i) => (
                                     <p key={i}>{t}</p>
